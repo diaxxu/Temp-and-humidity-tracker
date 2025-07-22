@@ -1,0 +1,60 @@
+void handleRoot() {
+  String html = R"rawliteral(
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset='UTF-8'>
+      <title>ESP32 Temp Logger</title>
+      <style>
+        body {
+          background-color: #0d1117;
+          color: #c9d1d9;
+          font-family: 'Segoe UI', sans-serif;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          margin: 0;
+        }
+        h1 {
+          color: #58a6ff;
+        }
+        .card {
+          background: #161b22;
+          padding: 20px 40px;
+          border-radius: 10px;
+          box-shadow: 0 0 15px rgba(0,0,0,0.5);
+          text-align: center;
+        }
+        .value {
+          font-size: 2.5rem;
+          margin: 10px 0;
+        }
+        .label {
+          font-size: 1.2rem;
+          color: #8b949e;
+        }
+        .footer {
+          margin-top: 20px;
+          font-size: 0.8rem;
+          color: #6e7681;
+        }
+      </style>
+    </head>
+    <body>
+      <div class='card'>
+        <h1>ESP32 Temp Logger</h1>
+        <div class='value'>)rawliteral" + String(temp) + R"rawliteral( °C</div>
+        <div class='label'>Temperature</div>
+        <div class='value'>)rawliteral" + String(hum) + R"rawliteral( %</div>
+        <div class='label'>Humidity</div>
+        <div class='footer'>Auto-refresh every 10s</div>
+      </div>
+      <script>setTimeout(()=>location.reload(), 10000);</script>
+    </body>
+    </html>
+  )rawliteral";
+
+  server.send(200, "text/html", html);
+}
